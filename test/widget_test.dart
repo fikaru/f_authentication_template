@@ -133,4 +133,29 @@ void main() {
 
     expect(find.text('User problem'), findsOneWidget);
   });
+
+  testWidgets('SignUp with missing @ widget testing',
+      (WidgetTester tester) async {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(
+      GetMaterialApp(
+        home: SignUpPage(),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.byKey(Key('signUpScaffold')), findsOneWidget);
+
+    await tester.enterText(find.byKey(Key('signUpEmail')), 'a');
+
+    await tester.enterText(find.byKey(Key('signUpPassord')), '123456');
+
+    await tester.tap(find.byKey(Key('signUpSubmit')));
+
+    await tester.pump();
+
+    expect(find.text('Validation nok'), findsOneWidget);
+  });
 }
