@@ -17,6 +17,14 @@ class MockAuthenticationController extends GetxService
     else
       return Future.value(false);
   }
+
+  @override
+  Future<bool> signup(user, password) {
+    if (user == 'a@a.com')
+      return Future.value(true);
+    else
+      return Future.value(false);
+  }
 }
 
 class MockAuthentication extends Mock implements Authentication {
@@ -39,7 +47,7 @@ void main() {
 
     // Build our app and trigger a frame.
     await tester.pumpWidget(
-      GetMaterialApp(
+      MaterialApp(
         home: LoginPage(),
       ),
     );
@@ -60,12 +68,12 @@ void main() {
     expect(find.text('User ok'), findsOneWidget);
   });
 
-  testWidgets('Login ok widget testing', (WidgetTester tester) async {
+  testWidgets('Login nok widget testing', (WidgetTester tester) async {
     WidgetsFlutterBinding.ensureInitialized();
 
     // Build our app and trigger a frame.
     await tester.pumpWidget(
-      GetMaterialApp(
+      MaterialApp(
         home: LoginPage(),
       ),
     );
